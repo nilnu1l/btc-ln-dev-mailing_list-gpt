@@ -1,0 +1,8 @@
+.editorconfig
+
+//for nodejs
+node_modules
+npm-debug.log
+
+//for cloudflare workers
+wrangler.toml
