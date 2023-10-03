@@ -14,6 +14,7 @@
   "dependencies": {
     "@cloudflare/ai": "^1.0.14",
     "mimetext": "^3.0.16",
+    "openai": "^4.11.1",
     "postal-mime": "^1.0.16"
   }
 }
