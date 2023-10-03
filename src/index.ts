@@ -1,9 +1,6 @@
-// import { Ai } from '@cloudflare/ai';
 import OpenAI from 'openai';
 import * as PostalMime from 'postal-mime';
 export interface Env {
-	// If you set another name in wrangler.toml as the value for 'binding',
-	// replace "AI" with the variable name you defined.
 	AI: any;
 	SRC_EMAIL: string;
 	DST_EMAIL: string;
@@ -38,7 +35,6 @@ export default {
 		const parser = new PostalMime.default();
 		const parsedEmail = await parser.parse(rawEmail);
 		console.log('parsedEmail', parsedEmail.text);
-		// if undefined, replace with empty string
 		const messageBody = parsedEmail.text || '';
 
 		const prompt = `${messageBody}`;
@@ -51,29 +47,6 @@ export default {
 		});
 		console.log('chatCompletion', chatCompletion.choices);
 
-		// const response = await ai.run('@cf/meta/m2m100-1.2b', {
-		// let chat = {
-		// 	messages: [
-		// 		{
-		// 			role: 'system',
-		// 			content:
-		// 				'You are a professional translator and also knowledgeable about Bitcoin and Lightning Network. Please create a Japanese summary from the given English text.',
-		// 		},
-		// 		{ role: 'user', content: prompt },
-		// 	],
-		// };
-		// // response をresult に順次詰める
-		// let result = '';
-		// let response = await ai.run('@cf/meta/llama-2-7b-chat-int8', chat);
-		// result += response.response;
-		// console.log('summarized result', result);
-
-		// while (response.response !== '') {
-		// 	const additionalMessage = "continue the conversation, if you dont't have anything to say, please reposnd with empty message";
-		// 	response = await ai.run('@cf/meta/llama-2-7b-chat-int8', additionalMessage);
-		// 	result += response.response;
-		// }
-		// 得られた結果をParse してMessage をString に変えてKV に保管する
 		const result = chatCompletion.choices.map((choice) => choice.message.content).join('\n');
 		console.log('result', result);
 		await env.LN_GPT_DEV.put(uuid, result);
