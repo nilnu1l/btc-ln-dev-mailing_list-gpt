@@ -1,0 +1,20 @@
+name = "gpt-api"
+main = "src/index.ts"
+compatibility_date = "2023-09-25"
+usage_model = "unbound"
+env = {}
+
+kv_namespaces = [
+	{ binding = "", id = "" }
+]
+
+[triggers]
+crons = []
+
+[vars]
+SRC_EMAIL = ""
+DST_EMAIL = ""
+OPENAI_API_KEY = ""
+
+[ai]
+binding = "AI"
